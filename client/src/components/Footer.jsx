@@ -330,7 +330,7 @@ const Footer = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <a
-                      href="tel:+917070186631"
+                      href="tel:+919999999999"
                       className="group flex items-center text-gray-600 hover:text-gray-800 transition-all duration-300"
                     >
                       <motion.div
@@ -344,7 +344,7 @@ const Footer = () => {
                           Phone
                         </span>
                         <span className="text-sm opacity-75">
-                          +91 70701 86631
+                          +91 99999 99999
                         </span>
                       </div>
                     </a>
@@ -354,7 +354,7 @@ const Footer = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <a
-                      href="mailto:ialam2943@gmail.com"
+                      href="mailto:email@gmail.com"
                       className="group flex items-center text-gray-600 hover:text-gray-800 transition-all duration-300"
                     >
                       <motion.div
@@ -368,7 +368,7 @@ const Footer = () => {
                           Email
                         </span>
                         <span className="text-sm opacity-75">
-                          ialam2943@gmail.com
+                          email@gmail.com
                         </span>
                       </div>
                     </a>
