@@ -5,7 +5,7 @@ import CategoryRows from './products/CategoryRows'
 
 const Home = () => {
   return (
-    <div className='mt-32 '>
+    <div className='mt-20 sm:mt-24 lg:mt-32'>
       <BannerProduct/>
       <BrandList />
       <CategoryRows />
