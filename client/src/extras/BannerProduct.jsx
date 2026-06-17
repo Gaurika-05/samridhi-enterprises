@@ -14,8 +14,8 @@ const BannerProduct = () => {
   const [direction, setDirection] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
 
-  const desktopImages = [b2];
-  const mobileImages = [b2];
+  const desktopImages = [b1, b2, b3, b4, b5];
+  const mobileImages = [b1, b2, b3, b4, b5];
 
   const nextImage = useCallback(() => {
     setDirection(1);
