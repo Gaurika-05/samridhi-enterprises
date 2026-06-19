@@ -307,8 +307,8 @@ const ProductsPage = () => {
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
             Bike Spares Parts
           </h1>
-          <span className="text-sm text-gray-500">
-            {parts.length} total parts
+          <span className="text-sm text-gray-500" aria-live="polite" aria-atomic="true">
+            {totalFiltered} of {parts.length} parts
           </span>
         </div>
       </motion.header>
@@ -319,11 +319,14 @@ const ProductsPage = () => {
             <div className="flex flex-col gap-4">
               <div className="flex-1 max-w-md">
                 <div className="relative">
+                  <label htmlFor="parts-search" className="sr-only">Search parts</label>
                   <input
+                    id="parts-search"
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search parts by name or Product ID..."
+                    aria-label="Search parts by name or product ID"
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                   <svg
@@ -342,9 +345,12 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <label htmlFor="parts-sort" className="sr-only">Sort products</label>
                 <select
+                  id="parts-sort"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
+                  aria-label="Sort products"
                   className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
                 >
                   <option value="name">Sort by Name</option>

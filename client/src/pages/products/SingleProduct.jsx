@@ -457,6 +457,7 @@ const SingleProduct = () => {
                         type="button"
                         onClick={decrementQuantity}
                         disabled={quantity === 1}
+                        aria-label="Decrease quantity"
                         className="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full hover:bg-blue-200 disabled:opacity-50 transition-colors"
                       >
                         <svg
@@ -487,6 +488,7 @@ const SingleProduct = () => {
                         type="button"
                         onClick={incrementQuantity}
                         disabled={quantity >= Math.min(part.stock, 10)}
+                        aria-label="Increase quantity"
                         className="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full hover:bg-blue-200 disabled:opacity-50 transition-colors"
                       >
                         <svg

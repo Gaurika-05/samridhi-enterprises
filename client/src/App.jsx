@@ -52,6 +52,12 @@ function App() {
   }, [dispatch]);
   return (
     <div className="">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -65,6 +71,7 @@ function App() {
       />
       <Header />
 
+      <main id="main-content" tabIndex={-1}>
       <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader /></div>}>
         <Routes>
         <Route path="/" element={<Home />} />
@@ -224,6 +231,7 @@ function App() {
         />
         </Routes>
       </Suspense>
+      </main>
 
       <Footer />
 
