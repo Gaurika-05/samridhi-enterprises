@@ -324,6 +324,7 @@ const Cart = () => {
                                 disabled={
                                   item.quantity <= 1 || item.part.stock === 0
                                 }
+                                aria-label={`Decrease quantity of ${item.name || "item"}`}
                                 className="w-10 h-10 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:bg-gray-300 transition-all duration-200 flex items-center justify-center font-bold"
                               >
                                 −
@@ -346,6 +347,7 @@ const Cart = () => {
                                     item.part.stock
                                   );
                                 }}
+                                aria-label={`Quantity of ${item.name || "item"}`}
                                 className="w-16 h-10 text-center border-0 bg-transparent font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-lg mx-2"
                                 disabled={item.part.stock === 0}
                               />
@@ -361,6 +363,7 @@ const Cart = () => {
                                   )
                                 }
                                 disabled={item.quantity >= item.part.stock}
+                                aria-label={`Increase quantity of ${item.name || "item"}`}
                                 className="w-10 h-10 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:bg-gray-300 transition-all duration-200 flex items-center justify-center font-bold"
                               >
                                 +
@@ -407,7 +410,7 @@ const Cart = () => {
                   Order Summary
                 </h3>
 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-8" aria-live="polite" aria-atomic="true">
                   <div className="flex justify-between items-center text-lg">
                     <span className="text-gray-600">
                       Subtotal ({cart.items.length}{" "}

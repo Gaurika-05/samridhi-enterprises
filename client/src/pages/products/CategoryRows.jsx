@@ -259,7 +259,12 @@ const CategoryRows = () => {
                       </motion.div>
                     ) : (
                       <div className="relative  p-1 mb-10">
-                        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50 pb-4">
+                        <div
+                          role="region"
+                          aria-label={`${category} products, scrollable list`}
+                          tabIndex={0}
+                          className="overflow-x-auto scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50 pb-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 rounded-lg"
+                        >
                           <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
