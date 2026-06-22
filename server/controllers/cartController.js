@@ -69,14 +69,22 @@ export const getCart = catchAsyncErrors(async (req, res, next) => {
     const part = item.part;
     if (part.stock <= 0) {
       warnings.push(`${part.name} is out of stock and has been removed from your cart.`);
-    } else if (part.stock < item.quantity) {
-      warnings.push(`Quantity for ${part.name} has been adjusted to ${part.stock} due to limited stock.`);
-      item.quantity = part.stock;
-      item.price = part.price * part.stock;
-      adjustedItems.push(item);
     } else {
-      // Keep price updated to current product price
-      item.price = part.price * item.quantity;
+      const storedUnitPrice = item.quantity > 0 ? item.price / item.quantity : part.price;
+      const currentUnitPrice = part.price;
+      
+      let finalQuantity = item.quantity;
+      if (part.stock < item.quantity) {
+        warnings.push(`Quantity for ${part.name} has been adjusted to ${part.stock} due to limited stock.`);
+        finalQuantity = part.stock;
+      }
+      
+      if (Math.round(storedUnitPrice * 100) !== Math.round(currentUnitPrice * 100)) {
+        warnings.push(`Price for ${part.name} has changed from ₹${storedUnitPrice.toLocaleString("en-IN")} to ₹${currentUnitPrice.toLocaleString("en-IN")}.`);
+      }
+      
+      item.quantity = finalQuantity;
+      item.price = currentUnitPrice * finalQuantity;
       adjustedItems.push(item);
     }
   }
