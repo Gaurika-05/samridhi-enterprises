@@ -1,5 +1,5 @@
 import express from "express";
-import { rateLimit } from "express-rate-limit";
+import rateLimit from "express-rate-limit";
 import upload from "../middleware/multer.js";
 import {
   addPart,
@@ -21,10 +21,26 @@ import admin from "../middleware/Admin.js";
 // and incidental abuse that would hammer the database.
 const browseLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,                  // 100 requests per IP per window
+  max: 100, // 100 requests per IP per window
   standardHeaders: "draft-7",
   legacyHeaders: false,
-  message: { success: false, message: "Too many requests, please try again later." },
+  message: {
+    success: false,
+    message: "Too many requests, please try again later.",
+  },
+});
+
+// Slightly tighter limiter for the personalized recommendations endpoint,
+// which runs several database lookups (cart + wishlist + orders) per call.
+const recommendLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 60, // 60 requests per IP per window
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many requests, please try again later.",
+  },
 });
 
 const partRouter = express.Router();
@@ -33,8 +49,17 @@ partRouter.post("/add", upload.array("images", 5), auth, admin, addPart);
 partRouter.get("/get", browseLimiter, getAllParts);
 partRouter.get("/get/:id", browseLimiter, getPartById);
 partRouter.get("/get/:id/similar", browseLimiter, getSimilarParts);
-partRouter.get("/get/:id/frequently-bought-together", browseLimiter, getFrequentlyBoughtTogether);
-partRouter.get("/recommendations/for-you", auth, getRecommendedForYou);
+partRouter.get(
+  "/get/:id/frequently-bought-together",
+  browseLimiter,
+  getFrequentlyBoughtTogether
+);
+partRouter.get(
+  "/recommendations/for-you",
+  recommendLimiter,
+  auth,
+  getRecommendedForYou
+);
 partRouter.put(
   "/update/:id",
   upload.array("images", 5),
